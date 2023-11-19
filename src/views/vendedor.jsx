@@ -2,9 +2,11 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react"
 import { Button, Table } from "reactstrap";
+import { useGlobalContext } from "../contexts/GlobalContext";
 
 export default function Vendedor() {
   const [vendedores, setVendedores] = useState([]);
+  const {vendedorQuantidade, getVendedorQuantidade} = useGlobalContext()
   
   const getVendedores = async () => {
     try {
@@ -45,31 +47,34 @@ export default function Vendedor() {
   const handleDelete = async id => {
     await delVendedor(id)
     await getVendedores()
+    await getVendedorQuantidade()
   }
   return (
-    <Table striped hover>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Nome</th>
-          <th>CPF</th>
-          <th>email</th>
-          <th>produtos</th>
-          <th>ação</th>
-        </tr>
-      </thead>
-      <tbody>
-        {vendedores.map(vendedor => <tr key={`${vendedor.id}`}>
-          <td>{vendedor.id}</td>
-          <td>{vendedor.nome}</td>
-          <td>{vendedor.cpf}</td>
-          <td>{vendedor.email}</td>
-          <td>{vendedor.produtos.length}</td>
-          <td>
-          <Button onClick={() => handleDelete(vendedor.id)} size="sm" color="danger" data-value={vendedor.id} title="Apagar"><FontAwesomeIcon icon={faTrash} /></Button>
-          </td>
-        </tr>)}
-      </tbody>
-    </Table>
+    <main>
+      <Table striped hover>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>email</th>
+            <th>produtos</th>
+            <th>ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          {vendedores.map(vendedor => <tr key={`${vendedor.id}`}>
+            <td>{vendedor.id}</td>
+            <td>{vendedor.nome}</td>
+            <td>{vendedor.cpf}</td>
+            <td>{vendedor.email}</td>
+            <td>{vendedor.produtos.length}</td>
+            <td>
+            <Button onClick={() => handleDelete(vendedor.id)} size="sm" color="danger" data-value={vendedor.id} title="Apagar"><FontAwesomeIcon icon={faTrash} /></Button>
+            </td>
+          </tr>)}
+        </tbody>
+      </Table>
+    </main>
   )
 }

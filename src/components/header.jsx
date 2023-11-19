@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Collapse, Nav, NavItem, NavLink, Navbar, NavbarBrand, NavbarToggler } from "reactstrap";
+import FormSearch from "./formSearch";
 
 export default function Header(args) {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +31,7 @@ export default function Header(args) {
               <NavLink tag={Link} to="/ferramenta/" active={isActive('/ferramenta')}>Ferramenta</NavLink>
             </NavItem>
           </Nav>
+          <FormSearch/>
         </Collapse>
       </Navbar>
     </header>
