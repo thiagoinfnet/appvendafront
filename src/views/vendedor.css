@@ -1,0 +1,15 @@
+.thead {
+  cursor: pointer;
+}
+.thead.active {
+  background-color: #eee !important;
+}
+.thead:hover {
+  background-color: #ddd !important;
+}
+.thead-container {
+  display: flex;
+  justify-content: space-between;
+}
+.thead-container .icon {
+}
